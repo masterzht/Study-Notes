@@ -1,5 +1,7 @@
 package com.example.networktest;
 
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -7,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.networktest.util.HttpCallbackListener;
-import com.example.networktest.util.HttpUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     //点击事件先下载网页，然后用xml或者json解析
     @Override
     public void onClick(View v) {
-        if (v.getId() == R.id.send_request) {
+        //if (v.getId() == R.id.send_request) {
 //其实这种写法有点问题，因为app中不可能只有这里面才用网络服务，其他的地方可能也有，这样的话其他的地方就需要重新写了。这显然是不好的。于是就催生出了网络服务工具类！！！所以就先写一个util的文件夹package，然后在里面加入各类工具类
             //sendRequestWithHttpURLConnection();
             //sendRequestWithOkHttp();
@@ -65,46 +65,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             //        parseXMLWithPull(response);
 
 
-            //规范用法，调用外部的http工具类
-            HttpUtil.sendHttpRequest("https://www.baidu.com",
-                    new HttpCallbackListener() {
 
-                        @Override
-                        public void onError(Exception e) {
+//因为不需要传到fragment去一些数据，所以也用不到newinstance
+//            getSupportFragmentManager().beginTransaction().replace(R.id.activity1, new BlankFragment()).addToBackStack(null).commit();
 
-                        }
-
-                        @Override
-                        public void onFinish(String response) {
-                            String responseData = response;
-
-                            //解析数据
-//                    parseJSONWithGSON(responseData);
-//                    parseJSONWithJSONObject(responseData);
-//                    parseXMLWithSAX(responseData);
-//                    parseXMLWithPull(responseData);
+            FragmentManager manager = getFragmentManager();
+            FragmentTransaction transaction = manager.beginTransaction();
+            BlankFragment fragment = new BlankFragment();
+            transaction.replace(R.id.activity1, fragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
 
 
-                            getSupportFragmentManager().beginTransaction().add(R.id.activity1, BlankFragment.newInstance(responseData)).commit();
-
-                        }
 
 
-                    });
-           /* HttpUtil.sendOkHttpRequest("https://www.baidu.com", new okhttp3.Callback() {
-                @Override
-                public void onFailure(Call call, IOException e) {
-
-                }
-
-                @Override
-                public void onResponse(Call call, Response response) throws IOException {
-                    String responseData=response.body().string();
-                    showResponse(responseData);
-
-                }
-            });*/
-        }
+        //}
     }
 
 

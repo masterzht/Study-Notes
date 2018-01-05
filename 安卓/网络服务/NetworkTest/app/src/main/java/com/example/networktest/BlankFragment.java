@@ -3,11 +3,14 @@ package com.example.networktest;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.example.networktest.util.HttpCallbackListener;
+import com.example.networktest.util.HttpUtil;
 
 
 /**
@@ -61,6 +64,57 @@ public class BlankFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
+        //规范用法，调用外部的http工具类
+        HttpUtil.sendHttpRequest("https://www.baidu.com",
+                new HttpCallbackListener() {
+
+                    @Override
+                    public void onError(Exception e) {
+
+                    }
+
+                    @Override
+                    public void onFinish(String response) {
+                        String responseData = response;
+
+                        //解析数据
+//                    parseUtil.parseJSONWithGSON(responseData);
+//                    parseUtil.parseJSONWithJSONObject(responseData);
+//                    parseUtil.parseXMLWithSAX(responseData);
+//                    parseUtil.parseXMLWithPull(responseData);
+
+                        showResponse(responseData);
+
+
+
+
+
+
+                    }
+
+
+                });
+           /* HttpUtil.sendOkHttpRequest("https://www.baidu.com", new okhttp3.Callback() {
+                @Override
+                public void onFailure(Call call, IOException e) {
+
+                }
+
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+                    String responseData=response.body().string();
+                    showResponse(responseData);
+
+                }
+            });*/
+
+
+
+
+
     }
 
     @Override
@@ -120,8 +174,13 @@ public class BlankFragment extends Fragment {
 
 
     private void showResponse(final String response) {
-
+        //使用匿名类，并且转换成UI线程
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                // 在这里进行UI操作，.将结果显示到界面上
                 responseText.setText(response);
-
+            }
+        });
     }
 }
