@@ -1,0 +1,15 @@
+#指定外层任意以.iml结尾的文件
+*.iml
+
+#.gradle文件夹
+.gradle
+
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+.DS_Store
+/build
+/captures
+
+#这个也可以忽略掉（默认不忽略)
+/gradle
