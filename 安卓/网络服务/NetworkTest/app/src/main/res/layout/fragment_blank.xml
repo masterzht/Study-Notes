@@ -2,9 +2,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.networktest.BlankFragment">
+    tools:context="com.example.networktest.fragment.BlankFragment">
 
     <!-- TODO: Update blank fragment layout -->
+  <!--  这个scrollview没有任何限制作用了-->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent" >

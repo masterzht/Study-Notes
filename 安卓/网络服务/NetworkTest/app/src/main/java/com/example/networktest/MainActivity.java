@@ -1,5 +1,6 @@
 package com.example.networktest;
 
+import android.annotation.SuppressLint;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.networktest.fragment.BlankFragment;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -51,13 +53,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //点击事件先下载网页，然后用xml或者json解析
+    @SuppressLint("ResourceType")
     @Override
     public void onClick(View v) {
-        //if (v.getId() == R.id.send_request) {
+        if (v.getId() == R.id.send_request) {
 //其实这种写法有点问题，因为app中不可能只有这里面才用网络服务，其他的地方可能也有，这样的话其他的地方就需要重新写了。这显然是不好的。于是就催生出了网络服务工具类！！！所以就先写一个util的文件夹package，然后在里面加入各类工具类
             //sendRequestWithHttpURLConnection();
             //sendRequestWithOkHttp();
-
 //然后就要解析数据了
             //        parseJSONWithGSON(response);
             //        parseJSONWithJSONObject(response);
@@ -66,20 +68,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
 
-//因为不需要传到fragment去一些数据，所以也用不到newinstance
+//使用工具类
 //            getSupportFragmentManager().beginTransaction().replace(R.id.activity1, new BlankFragment()).addToBackStack(null).commit();
 
             FragmentManager manager = getFragmentManager();
             FragmentTransaction transaction = manager.beginTransaction();
             BlankFragment fragment = new BlankFragment();
-            transaction.replace(R.id.activity1, fragment);
+            transaction.add(R.id.scrollview1, fragment);
             transaction.addToBackStack(null);
             transaction.commit();
 
+        }
 
+        else if (v.getId()==12345){
 
+        }
 
-        //}
     }
 
 
