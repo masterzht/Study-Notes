@@ -1,0 +1,4 @@
+#把编译的build列入版本控制外
+/build
+/src/test
+/src/androidTest
