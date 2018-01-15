@@ -74,7 +74,12 @@ public class HttpUtil {
         Request request = new Request.Builder()
                 .url(address)
                 .build();
+        
         client.newCall(request).enqueue(callback);
+        //先创建一个请求call
+         //Call call= client.newCall(request);
+          //正常情况下直接获取内容Response reponse=call.enqueue(); //不用回调，这还是在主线程
+         //call.enqueue(callback);  //这个enqueue方法内部其实就已经是在子线程执行，把response丢给callback处理，在子线程
     }
 
 }
