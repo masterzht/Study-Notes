@@ -39,7 +39,7 @@ public class EmpSqliteimpl implements IEmpDAO{
 			emp.setEmpno(rs.getInt(1)) ;
 			emp.setEname(rs.getString(2)) ;
 			emp.setJob(rs.getString(3)) ;
-			//emp.setHiredate(rs.getDate(4)) ;
+			//emp.setHiredate(rs.getDate(4)) ;//这个目前还不清楚原因，放着
 			emp.setSal(rs.getFloat(5)) ;
 			all.add(emp) ;
 		}

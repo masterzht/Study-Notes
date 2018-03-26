@@ -4,21 +4,21 @@ import java.util.List;
 
 import cn.mldn.lxh.dao.IEmpDAO;
 import cn.mldn.lxh.dao.impl.EmpMysqlImpl;
-import cn.mldn.lxh.dao.impl.EmpSqliteimpl;
+import cn.mldn.lxh.dbc.DatabaseConnection;
 import cn.mldn.lxh.dbc.MysqlConnection;
-import cn.mldn.lxh.dbc.SqliteConnection;
 import cn.mldn.lxh.vo.Emp;
 
-public class EmpSqliteProxy implements IEmpDAO{
-	
-	private SqliteConnection dbc = null ;
+public class EmpProxy implements IEmpDAO {
+	private DatabaseConnection dbc = null ;
 	private IEmpDAO dao = null ;
-	public EmpSqliteProxy() throws Exception {
-		this.dbc = new SqliteConnection() ;
-		this.dao = new EmpSqliteimpl(this.dbc.getConnection()) ;
+
+	
+	public EmpProxy(DatabaseConnection dbc,IEmpDAO dao ) throws Exception {
+		this.dbc = dbc;
+		this.dao = dao;
 	}
-	@Override
-	public boolean doCreate(Emp emp) throws Exception {
+	
+	public boolean doCreate(Emp emp) throws Exception{
 		boolean flag = false ;
 		try{
 			if(this.dao.findById(emp.getEmpno()) == null){
@@ -31,8 +31,7 @@ public class EmpSqliteProxy implements IEmpDAO{
 		}
 		return flag ;
 	}
-	@Override
-	public List<Emp> findAll(String keyWord) throws Exception {
+	public List<Emp> findAll(String keyWord) throws Exception{
 		List<Emp> all = null ;
 		try{
 			all = this.dao.findAll(keyWord) ;
@@ -43,8 +42,7 @@ public class EmpSqliteProxy implements IEmpDAO{
 		}
 		return all ;
 	}
-	@Override
-	public Emp findById(int empno) throws Exception {
+	public Emp findById(int empno) throws Exception{
 		Emp emp = null ;
 		try{
 			emp = this.dao.findById(empno) ;
@@ -55,5 +53,4 @@ public class EmpSqliteProxy implements IEmpDAO{
 		}
 		return emp ;
 	}
-
 }

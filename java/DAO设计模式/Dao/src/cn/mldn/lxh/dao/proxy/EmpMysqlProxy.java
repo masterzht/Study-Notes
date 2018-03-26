@@ -15,7 +15,7 @@ public class EmpMysqlProxy implements IEmpDAO {
 	private IEmpDAO dao = null ;
 	public EmpMysqlProxy() throws Exception {
 		this.dbc = new MysqlConnection() ;
-		this.dao = new EmpDAOImpl(this.dbc.getConnection()) ;
+		this.dao = new EmpMysqlImpl(this.dbc.getConnection()) ;
 	}
 	public boolean doCreate(Emp emp) throws Exception{
 		boolean flag = false ;
