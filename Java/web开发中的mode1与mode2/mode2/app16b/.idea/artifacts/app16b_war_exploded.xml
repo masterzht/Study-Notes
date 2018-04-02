@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="app16b:war exploded">
+    <output-path>$PROJECT_DIR$/classes/artifacts/app16b_war_exploded</output-path>
+    <root id="root">
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="app16b" />
+        </element>
+      </element>
+      <element id="library" level="module" name="servlet-api.jar" module-name="app16b" />
+      <element id="javaee-facet-resources" facet="app16b/web/Web" />
+    </root>
+  </artifact>
+</component>
